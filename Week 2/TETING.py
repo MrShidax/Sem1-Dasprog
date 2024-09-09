@@ -1,28 +1,32 @@
-def witch_riddle(numbers, b, c, indices):
-    # Convert the input list of numbers to a list of integers
-    numbers = list(map(int, numbers.split()))
-    
-    # Convert indices from string to list of integers
-    indices = list(map(int, indices.split()))
-    
-    # Length of the list
-    n = len(numbers)
-    
-    # Perform the cat jumps c times
-    for _ in range(c):
-        # Rotate the list by b positions
-        numbers = numbers[-b:] + numbers[:-b]
-    
-    # Fetch the values at the specified indices
-    result = [numbers[i] for i in indices if i < len(numbers)]
-    
-    # Print the result as space-separated values
-    print(" ".join(map(str, result)))
+def last_man_standing(N, C):
+    dp = [False] * (N + 1)
 
-# Read inputs from the user
-numbers = input("Enter the list of numbers: ")
-b = int(input("Enter the number of cats jumping each time: "))
-c = int(input("Enter the number of jumps: "))
-indices = input("Enter the indices separated by space: ")
+    if N >= 1:
+        dp[1] = True
+    if N >= 2:
+        dp[2] = True
+    if N >= 5:
+        dp[5] = True
 
-witch_riddle(numbers, b, c, indices)
+    for i in range(1, N + 1):
+        if i - 1 >= 0 and not dp[i - 1]:
+            dp[i] = True
+        elif i - 2 >= 0 and not dp[i - 2]:
+            dp[i] = True
+        elif i - 5 >= 0 and not dp[i - 5]:
+            dp[i] = True
+
+    if dp[N]:
+        if C == 1:
+            return "Lala"
+        else:
+            return "Lili"
+    else:
+        if C == 1:
+            return "Lili"
+        else:
+            return "Lala"
+
+# Read inputs
+N, C = map(int, input().split())
+print(last_man_standing(N, C))
