@@ -9,5 +9,3 @@ if (waktu >= 0):
     print(f"{HH3:02}:{MM3:02}:{SS3:02}")
 else:
     print("See you on the next Pear event!")
-
-
