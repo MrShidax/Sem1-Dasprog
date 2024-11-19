@@ -3,7 +3,7 @@ N = int(len(S))
 P = False
 AB = False
 
-for i in range(min(1,N), N):
+for i in range(N):
     if (S[i] == S[-(i+1)]):
         P = True
     else:
